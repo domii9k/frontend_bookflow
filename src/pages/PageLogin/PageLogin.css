@@ -1,0 +1,144 @@
+.login {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+
+    background-image: url(../../assets/background-book.png);
+    color: #081552;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 500px;
+    width: 600px;
+    position: relative;
+}
+
+.login-container_title {
+    position: absolute;
+    background-color: #081552;
+    opacity: 90%;
+    color: white;
+    display: grid;
+    place-items: center;
+    height: 90px;
+    width: 500px;
+    top: -45px;
+}
+
+.container-content{
+    position: absolute;
+    display: grid;
+    place-items: center;
+    bottom: 50px;
+}
+
+.login-container_content {
+    width: 400px;
+    text-align: center;
+}
+
+.icon-login{
+    width: 50px;
+    margin-right: 20px;
+}
+
+.icon-login img{
+    margin-top: 30px;
+    width: 35px;
+    height: 35px;
+}
+
+.input{
+    display: flex;
+}
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #081552;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #081552;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+        color: transparent;
+    }
+
+    &:placeholder-shown~.form__label {
+        font-size: 1.3rem;
+        cursor: text;
+        top: 20px;
+    }
+}
+
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+
+.form__field:focus {
+    ~.form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: var(--bg-color-2);
+        font-weight: 700;
+    }
+
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, white, var(--bg-color-2));
+    border-image-slice: 1;
+}
+
+/* reset input */
+.form__field {
+    &:required,
+    &:invalid {
+        box-shadow: none;
+    }
+}
+
+.button{
+    background-color: #EC0B43;
+    color: white;
+    font-size: 24px;
+    padding: 15px 100px;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.invalid{
+    color: red;
+}
+
+.text-1{
+    margin-top: 10px;
+    margin-bottom: 130px;
+}
+
+.text-2{
+    margin-top: 30px;
+}

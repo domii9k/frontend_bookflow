@@ -1,0 +1,40 @@
+.dropdown-container {
+    position: relative;
+    width: 100%; /* A largura do contêiner é baseada no elemento pai */
+}
+
+.inputLabel {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%; /* Garante que a label ocupe toda a largura disponível */
+}
+
+.dropdown {
+    position: absolute; /* Faz com que o dropdown fique abaixo do input */
+    top: 100%; /* Coloca o dropdown logo abaixo do input */
+    left: 40px;
+    width: 300px !important; /* Força a largura para 200px */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 200px; /* Limita a altura do dropdown */
+    overflow-y: auto; /* Permite rolagem se houver muitos itens */
+    z-index: 1000; /* Garante que o dropdown fique acima de outros elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown ul{
+    width: 100%;
+    text-align: center;
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}

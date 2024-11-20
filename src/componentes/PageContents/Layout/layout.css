@@ -1,0 +1,128 @@
+main{
+    display: flex;
+    height: 100vh;
+}
+
+main section{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+main section .LayoutContent{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: grid;
+}
+
+.container{
+    width: 90%;
+    margin: 50px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px 0px rgba(123, 130, 166, 0.30), -2px -2px 10px 0px rgba(123, 130, 166, 0.30);
+}
+
+.containerCadastro{
+    width: 90%;
+    margin: auto 50px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px 0px rgba(123, 130, 166, 0.30), -2px -2px 10px 0px rgba(123, 130, 166, 0.30);
+    flex: 1;
+}
+
+.container .container-header-page{
+    display: grid;
+    padding: 25px;
+}
+
+.container .container-header-page .page-icon-name{
+    display: flex;
+    font-size: 24px;
+    color: #081552;
+    margin-bottom: 35px;
+}
+
+.container .container-header-page .page-icon-name h1{
+    margin-left: 25px;
+}
+
+.container .container-header-page .page-icon-name .page-button-add{
+    margin-left: auto;
+    display: flex;
+    background-color: #EC0B43;
+    height: 50px;
+    width: 200px;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.container .container-header-page .page-icon-name .page-button-add p{
+    color: white;
+    font-size: 20px;
+    margin-right: auto;
+}
+
+.container .container-header-page .page-icon-name .page-button-add img{
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.container .container-header-page .page-inputs-search{
+    display: flex;
+}
+
+.container .container-header-page .page-inputs-search input, select{
+    width: 280px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background: #E8ECFF;
+    padding-left: 20px;
+}
+
+.container .container-header-page .page-inputs-search .selects{
+    margin-left: auto;
+}
+
+.container .container-header-page .page-inputs-search select{
+    width: 120px;
+    padding-left: 10px;
+    margin-left: 25px;
+}
+
+.container-table{
+    margin: 10px 20px 0px 20px;
+    height: 350px;
+    overflow:auto; 
+}
+
+table {
+  border-collapse: collapse;
+  background-color: white;
+  color: #081552;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 12PX;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+tr:nth-child(even) {
+  background-color: #E8ECFF;
+}
+
+tbody tr:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+  }

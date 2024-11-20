@@ -1,0 +1,124 @@
+.tituloCadastro {
+    background-color: #081552;
+    color: white;
+    height: 70px;
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.tituloCadastro p {
+    margin-left: 25px;
+}
+
+.formCadastro {
+    flex-wrap: wrap;
+    margin: 70px 240px 0 240px;
+}
+
+.formCadastro .inputLabel {
+    width: 290px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.observacoes {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    height: 150px;
+}
+
+.formCadastro .textareaLabel {
+    width: 100%;
+    display: grid;
+}
+
+.formCadastro .textareaLabel textarea {
+    border-radius: 8px;
+    border: 1px solid #bbbbbb;
+}
+
+.formCadastro label input {
+    width: 190px;
+    height: 30px;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.formCadastro div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.termosCadastro {
+    flex-wrap: wrap;
+    margin: 0 240px 0 240px;
+    color: #081552;
+}
+
+.termosCadastro ul {
+    margin-left: 20px;
+}
+
+.aceitarTermos {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.aceitarTermos label {
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.aceitarTermos label span {
+    font-size: 15px;
+    margin-left: 25px;
+}
+
+.aceitarTermos label input {
+    margin-right: 10px;
+}
+
+.container-buttons{
+    display: flex;
+    justify-content: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 130px;
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.buttonCadastrar {
+    background-color: #EC0B43;
+}
+
+.buttonDevolvido{
+    background-color: #31884B;
+}
+
+.buttonEditar {
+    background-color: #CC9329;
+}
+
+.buttonDesativar {
+    background-color: gray;
+}

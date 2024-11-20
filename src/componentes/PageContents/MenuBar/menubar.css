@@ -1,0 +1,64 @@
+.menu,
+.menu-close {
+    min-width: 200px;
+    max-height: 100vh;
+    background-color: #071E39;
+    color: white;
+    font-size: 20px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.menu-close {
+    min-width: 70px;
+}
+
+.menu-options {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-options-pages:last-child {
+    margin-top: auto;
+}
+
+.menu-options-pages:hover {
+    background-color: #174A86;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.menu-options-pages span {
+    display: flex;
+    height: 45px;
+    align-items: center;
+    color: white;
+}
+
+.menu-options-pages-close{
+    display: flex;
+    height: 45px;
+    justify-content: center;
+}
+
+.option-select{
+    background-color: #174A86;
+}
+
+.menu-options-pages span .icon {
+    width: 25px;
+    height: 25px;
+    margin: 0px 15px;
+}
+
+.menu-options-logo span {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0px 15px 0px;
+}
+
+.icon-logo-secundario{
+    width: 62px;
+    height: 62px;
+}

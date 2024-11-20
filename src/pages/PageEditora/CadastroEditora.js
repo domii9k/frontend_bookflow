@@ -43,7 +43,8 @@ const CadastroEditora = () => {
         }
     };
 
-    const excluir = async () => {
+    /*
+        const excluir = async () => {
         const confirmDelete = window.confirm('Você tem certeza que deseja excluir esta editora?');
         if (confirmDelete) {
             try {
@@ -56,6 +57,7 @@ const CadastroEditora = () => {
             }
         }
     };
+    */
 
     const aoDigitar = (e) => {
         setObjEditora({ ...objEditora, [e.target.name]: e.target.value });

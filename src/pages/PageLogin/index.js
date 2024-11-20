@@ -22,8 +22,6 @@ const LoginComponent = () => {
                 localStorage.setItem('token', token); // Armazena o token no localStorage
                 AuthService.setAuthToken(token); // Configura o token para as requisições
                 navigate('/Emprestimos'); // Redireciona para a tela "Livros"
-
-                console.log("New Token: ",response.data.token);
             } else {
                 setMessage('Credenciais Incorretas!');
             }

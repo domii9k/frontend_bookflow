@@ -1,31 +1,32 @@
-header{
+header {
     border-bottom: 1px solid lightgray;
+    color: #081552E5;
 }
 
-header ul{
+header ul {
     display: flex;
     list-style: none;
 }
 
-header ul li:last-child{
+header ul li:last-child {
     margin-left: auto;
 }
 
-header ul li span{
+header ul li span {
     display: flex;
     align-items: center;
     margin: 10px 0px;
 }
 
-header ul li span img{
+header ul li span img {
     margin-left: 25px;
     cursor: pointer;
 }
 
-.iconClock{
+.iconClock {
     margin-right: 10px;
 }
 
-header ul li span p{
+header ul li span p {
     margin: 0px 25px;
 }

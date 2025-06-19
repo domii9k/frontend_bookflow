@@ -126,3 +126,14 @@ tbody tr:hover {
     background-color: gray;
     color: white;
   }
+
+.acesso-negado{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    padding: 0 0 15px 50px;
+    color: #081552E5;
+    font-weight: bold;
+}

@@ -14,6 +14,7 @@ import CadastroCurso from './pages/PageCurso/CadastroCurso';
 import CadastroCategoria from './pages/PageCategoria/CadastroCategoria';
 import CadastroLivro from './pages/PageLivros/CadastroLivros';
 import CadastroAlunos from './pages/PageAlunos/CadastroAlunos';
+import PageNotFound from './pages/PageNotFound';
 
 function RoutersApp() {
   return (
@@ -36,6 +37,7 @@ function RoutersApp() {
         <Route path='/Configuracoes/CadastrarEditora' element={<CadastroEditora />} />
         <Route path='/Configuracoes/CadastrarCurso' element={<CadastroCurso />} />
         <Route path='/Configuracoes/CadastrarCategoria' element={<CadastroCategoria />} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

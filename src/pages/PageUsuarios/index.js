@@ -18,7 +18,13 @@ const PageUsuario = () => {
     // Se ocorrer algum erro na requisição
     if (error) {
         console.error('Erro ao carregar Livros:', error);
-        return <p>Acesso negado!</p>;
+        return (
+            <Layout>
+                <section className='container'>
+                    <p className='acesso-negado'>Acesso negado!</p>
+                </section>
+            </Layout>
+        )
     }
 
     // Carregando dados
@@ -40,7 +46,7 @@ const PageUsuario = () => {
                     nomeBotao={"Usuário"}
                     icon={iconListaUsuario}
                 />
-                <TableUsuarios 
+                <TableUsuarios
                     vetor={usuarios}
                 />
             </section>

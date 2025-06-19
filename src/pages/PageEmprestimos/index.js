@@ -38,7 +38,7 @@ const PageEmprestimo = () => {
                 <HeaderPage
                     titulo={"Lista de Emprestimos"}
                     nomeBotao={"Emprestimo"}
-                    cadastrar={"/CadastrarEmprestismos"}
+                    cadastrar={"/CadastrarEmprestimos"}
                     icon={iconListaEmprestimo}
                 />
                 <TableEmprestimos

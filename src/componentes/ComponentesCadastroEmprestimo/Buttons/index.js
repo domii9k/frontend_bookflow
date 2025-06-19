@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
 import IconSave from '../../../assets/icon-save.png'
+import PermissionGate from '../../Permission';
+import useUser from '../../../hook/useUser';
 
-const Buttons = ({ cadastrarOuAlterar, devolver, desativar, id, showDevolvido }) => {
+const Buttons = ({ cadastrarOuAlterar, devolver, desativar, id, permission, showDevolvido, isAluno, nameButtonCancelar}) => {
+
+    const { user, loading } = useUser();
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
+
     return (
         <div className="container-buttons">
             {
@@ -18,10 +27,17 @@ const Buttons = ({ cadastrarOuAlterar, devolver, desativar, id, showDevolvido })
                         ) : (
                             <></>
                         )}
+                        {isAluno ?
+                            (permission ? <PermissionGate permissions={[user.permissao]}>
+                                <Link onClick={desativar} className="buttons buttonDesativar"><span>
+                                    <img src={IconSave} alt="Botao para desativar" />
+                                </span>Desativar</Link>
+                            </PermissionGate> :
+                                <></>
+                            ) : <Link onClick={desativar} className="buttons buttonDesativar"><span>
+                                <img src={IconSave} alt="Botao para desativar" />
+                            </span>{nameButtonCancelar}</Link>}
 
-                        <Link onClick={desativar} className="buttons buttonDesativar"><span>
-                            <img src={IconSave} alt="Botao para desativar" />
-                        </span>Desativar</Link>
                     </>
                 ) : (
                     <Link onClick={cadastrarOuAlterar} className="buttons buttonCadastrar"><span>

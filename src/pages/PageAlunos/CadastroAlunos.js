@@ -250,6 +250,8 @@ const CadastroAlunos = () => {
                 devolver={desativar}
                 desativar={desativar}
                 showDevolvido={false}
+                isAluno={true}
+                permission={true}
                 id={id}
             />
         </Layout>

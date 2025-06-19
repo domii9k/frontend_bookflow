@@ -5,7 +5,7 @@ const TableEmprestimos = ({ vetor }) => {
     const navigate = useNavigate(); // Envio para demais telas
 
     const handleClick = (emprestimo) => { // Quando clicado sera direcionado para a tela de cadastro com os campos preenchidos com o item em questao
-        navigate(`/CadastrarEmprestismos/${emprestimo.codEmprestimo}`);
+        navigate(`/CadastrarEmprestimos/${emprestimo.codEmprestimo}`);
     };
 
     return (

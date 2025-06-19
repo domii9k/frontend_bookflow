@@ -24,8 +24,8 @@ function RoutersApp() {
         <Route path='/Alunos' element={<PageAluno />} />
         <Route path='/Livros' element={<PageLivro />} />
         <Route path='/Emprestimos' element={<PageEmprestimo />} />
-        <Route path='/CadastrarEmprestismos' element={<CadastroEmprestimos />} />
-        <Route path='/CadastrarEmprestismos/:id' element={<CadastroEmprestimos />} />
+        <Route path='/CadastrarEmprestimos' element={<CadastroEmprestimos />} />
+        <Route path='/CadastrarEmprestimos/:id' element={<CadastroEmprestimos />} />
         <Route path='/CadastrarLivros' element={<CadastroLivro />} />
         <Route path='/CadastrarLivros/:id' element={<CadastroLivro />} />
         <Route path='/CadastrarAlunos' element={<CadastroAlunos />} />

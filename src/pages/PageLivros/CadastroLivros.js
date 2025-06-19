@@ -249,6 +249,7 @@ const CadastroLivro = () => {
                 cadastrarOuAlterar={cadastrarOuAlterar}
                 devolver={desativar}
                 desativar={desativar}
+                nameButtonCancelar={"Desativa"}
                 showDevolvido={false}
                 id={id}
             />

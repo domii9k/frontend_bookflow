@@ -6,12 +6,13 @@ import DropDownAluno from "../../componentes/ComponentesCadastroEmprestimo/DropD
 import { useEffect, useState } from "react";
 import { fetchEmprestimoById, alterarEmprestimos, cadastrarEmprestimos, devolverEmprestimo, desativarEmprestimo } from '../../api/Emprestimo/api'
 import DropDownLivro from "../../componentes/ComponentesCadastroEmprestimo/DropDownLivro";
-import DropDownRespEmprestimo from "../../componentes/ComponentesCadastroEmprestimo/DropDownRespEmprestimo";
 import Buttons from "../../componentes/ComponentesCadastroEmprestimo/Buttons";
+import useUser from "../../hook/useUser";
 
 const CadastroEmprestimos = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user, loading } = useUser();
 
     const emprestimo = {
         dataEmprestimo: "",
@@ -24,18 +25,13 @@ const CadastroEmprestimos = () => {
         codLivro: {
             codLivro: ""
         },
-        respEmprestimo: {
-            codUsuario: ""
-        },
-        respDevolucao: {
-            codUsuario: ""
-        }
+        respEmprestimo: user ? { codUsuario: user.codUsuario } : { codUsuario: "" },
+        respDevolucao: user ? { codUsuario: user.codUsuario } : { codUsuario: "" },
     }
 
     const [objEmprestimo, setObjEmprestimo] = useState(emprestimo);
     const [ra, setRA] = useState(""); // Estado separado para exibição do RA
     const [patrimonio, setPatrimonio] = useState(""); // Estado separado para exibição do patrimônio'
-
 
     // Função fetcher para o SWR
     const fetcher = async (id) => {
@@ -53,6 +49,10 @@ const CadastroEmprestimos = () => {
             setPatrimonio(emprestimoData.codLivro?.patrimonio || ""); // Atualiza o estado de patrimônio
         }
     }, [emprestimoData]);
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
 
     if (id > 0) {
         // Carregando dados
@@ -90,44 +90,47 @@ const CadastroEmprestimos = () => {
         setPatrimonio(livro.patrimonio); // Atualiza o patrimônio para exibição
     };
 
-    // Callback para lidar com a seleção de um responsavel pelo empretimo
-    const handleRespEmprestimoSelecionado = (respEmprestimo) => {
-        setObjEmprestimo((prevState) => ({
-            ...prevState,
-            respEmprestimo: { codUsuario: respEmprestimo.codUsuario } // Atualiza o codRespEmprestimo no estado
-        }));
-    };
-
-    // Callback para lidar com a seleção de um responsavel pela devolucao
-    const handleRespDevolucaoSelecionado = (respDevolucao) => {
-        setObjEmprestimo((prevState) => ({
-            ...prevState,
-            respDevolucao: { codUsuario: respDevolucao.codUsuario } // Atualiza o codRespDevolucao no estado
-        }));
-    };
-
     const cadastrarOuAlterar = async () => {
-        if (!objEmprestimo.aluno.codAluno || !objEmprestimo.codLivro.codLivro || !objEmprestimo.respEmprestimo.codUsuario || !objEmprestimo.dataPrevDevolucao) {
-            alert('Por favor, preencha todos os campos obrigatórios: Aluno, Livro, Reponsavel e Data Prevista para a Devolução!');
+        // Verifica se o usuário está logado
+        if (!user) {
+            alert('Usuário não autenticado!');
+            return;
+        }
+
+        // Prepara os dados completos do empréstimo
+        const dadosEmprestimo = {
+            ...objEmprestimo,
+            // Garante que o responsável seja o usuário logado
+            respEmprestimo: {
+                codUsuario: user.codUsuario
+            }
+        };
+
+        if (!dadosEmprestimo.aluno.codAluno ||
+            !dadosEmprestimo.codLivro.codLivro ||
+            !dadosEmprestimo.dataPrevDevolucao) {
+            alert('Por favor, preencha todos os campos obrigatórios: Aluno, Livro e Data Prevista para a Devolução!');
             return;
         }
 
         try {
-            const response = id ? await alterarEmprestimos(id, objEmprestimo) : await cadastrarEmprestimos(objEmprestimo);
-            console.log('Resposta da API:', response);
+            const response = id ?
+                await alterarEmprestimos(id, dadosEmprestimo) :
+                await cadastrarEmprestimos(dadosEmprestimo);
+
             if (response.mensagem) {
                 alert(response.mensagem);
             } else {
-                alert('Emprestimo Cadastrado com Sucesso!')
-                setTimeout(() => {
-                    if (!id) navigate(`/CadastrarEmprestismos/${response.codEmprestimo}`);
-                }, 2000);
+                alert(id ? 'Empréstimo alterado com sucesso!' : 'Empréstimo cadastrado com sucesso!');
+                if (!id) {
+                    setTimeout(() => {
+                        navigate(`/CadastrarEmprestimos/${response.codEmprestimo}`);
+                    }, 2000);
+                }
             }
         } catch (error) {
-            console.error('Erro ao cadastrar/alterar Emprestimo:', error);
-
-            // Captura e exibe a mensagem de erro retornada pela API
-            if (error.response && error.response.data && error.response.data.message) {
+            console.error('Erro ao cadastrar/alterar Empréstimo:', error);
+            if (error.response?.data?.message) {
                 alert(error.response.data.message);
             } else {
                 alert('Ocorreu um erro ao tentar cadastrar/alterar o empréstimo.');
@@ -137,19 +140,32 @@ const CadastroEmprestimos = () => {
 
     const devolver = async () => {
         try {
-            const response = await devolverEmprestimo(id, objEmprestimo);
-            console.log('Resposta da API:', response);
+            if (!user) {
+                alert('Usuário não autenticado!');
+                return;
+            }
+
+            const emprestimoParaDevolver = {
+                ...objEmprestimo,
+                respDevolucao: {
+                    codUsuario: user.codUsuario
+                },
+                dataDevolucao: objEmprestimo.dataDevolucao || new Date().toISOString().split('T')[0]
+            };
+
+            const response = await devolverEmprestimo(id, emprestimoParaDevolver);
+
             if (response.mensagem) {
                 alert(response.mensagem);
             } else {
-                alert('Emprestimo Devolvido com Sucesso!')
+                alert('Empréstimo Devolvido com Sucesso!');
                 setTimeout(() => {
                     navigate(`/Emprestimos`);
                 }, 2000);
             }
         } catch (error) {
-            console.error('Erro ao devolver Emprestimo:', error);
-            alert('Ocorreu um erro ao tentar devolver o Empretimo. Certifique-se que preencheu o campo Responsavel pelo Emprestimo!');
+            console.error('Erro ao devolver Empréstimo:', error);
+            alert(error.response?.data?.message || 'Ocorreu um erro ao tentar devolver o empréstimo.');
         }
     };
 
@@ -191,8 +207,6 @@ const CadastroEmprestimos = () => {
     const aoDigitar = (e) => {
         setObjEmprestimo({ ...objEmprestimo, [e.target.name]: e.target.value });
     };
-
-    console.log(objEmprestimo)
 
     return (
         <Layout>
@@ -241,11 +255,19 @@ const CadastroEmprestimos = () => {
                     </div>
 
                     <div>
-                        <label className="inputLabel">
-                            <DropDownRespEmprestimo
-                                selecionado={handleRespEmprestimoSelecionado}
-                                valorObj={objEmprestimo.respEmprestimo}
-                                titulo={'Responsavel:'}
+                        <label className="inputLabel"> Resp:
+                            <input
+                                name="respEmprestimo"
+                                type="text"
+                                placeholder="Responsavel:"
+                                value={user ? `${user.nome} ${user.sobrenome}` : ''}
+                                readOnly
+                            />
+                            {/* Campo oculto para enviar o ID */}
+                            <input
+                                type="hidden"
+                                name="respEmprestimo.codUsuario"
+                                value={user.codUsuario}
                             />
                         </label>
 
@@ -271,11 +293,19 @@ const CadastroEmprestimos = () => {
 
                         {
                             id ? (
-                                <label className="inputLabel">
-                                    <DropDownRespEmprestimo
-                                        selecionado={handleRespDevolucaoSelecionado}
-                                        valorObj={objEmprestimo.respDevolucao}
-                                        titulo={'Responsavel Devolução:'}
+                                <label className="inputLabel"> Responsavel Devolução:
+                                    <input
+                                        name="respEmprestimo"
+                                        type="text"
+                                        placeholder="Responsavel:"
+                                        value={user ? `${user.nome} ${user.sobrenome}` : ''}
+                                        readOnly
+                                    />
+                                    {/* Campo oculto para enviar o ID */}
+                                    <input
+                                        type="hidden"
+                                        name="respEmprestimo.codUsuario"
+                                        value={user.codUsuario}
                                     />
                                 </label>
                             ) : (
@@ -325,6 +355,7 @@ const CadastroEmprestimos = () => {
                 cadastrarOuAlterar={cadastrarOuAlterar}
                 devolver={devolver}
                 desativar={desativar}
+                nameButtonCancelar={"Cancelar"}
                 showDevolvido={true}
                 id={id}
             />

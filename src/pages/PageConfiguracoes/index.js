@@ -11,7 +11,7 @@ const PageConfiguracoes = () => {
     return (
         <Layout>
             <section className="configuracoes-container">
-                <h1>Lista de Solicitações</h1>
+                <h1>Lista de Configurações</h1>
 
                 <section className="configuracoes-content">
                     <Link to="CadastrarCategoria">

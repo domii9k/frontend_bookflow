@@ -18,7 +18,7 @@ const PageUsuario = () => {
     // Se ocorrer algum erro na requisição
     if (error) {
         console.error('Erro ao carregar Livros:', error);
-        return <p>Nao encontrado!</p>;
+        return <p>Acesso negado!</p>;
     }
 
     // Carregando dados

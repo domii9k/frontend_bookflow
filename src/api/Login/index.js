@@ -15,6 +15,21 @@ class AuthService {
             delete axios.defaults.headers.common['Authorization'];
         }
     }
+
+    setUserData(userData) {
+        localStorage.setItem('user', JSON.stringify(userData));
+    }
+
+    getUserData() {
+        const user = localStorage.getItem('user');
+        return user ? JSON.parse(user) : null;
+    }
+
+    clearUser() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        delete axios.defaults.headers.common['Authorization'];
+    }
 }
 
 export default new AuthService();

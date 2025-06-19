@@ -12,6 +12,8 @@ import iconConfiguracao from "../../../assets/icon-config.png";
 import iconArrowRight from "../../../assets/arrow-right.png";
 import iconArrowLeft from "../../../assets/arrow-left.png";
 import MenuLink from "./MenuLink"
+import useUser from "../../../hook/useUser";
+import PermissionGate from "../../../componentes/Permission"
 
 const MenuBar = () => {
     const [openMenu, setOpenMenu] = useState(false);
@@ -33,6 +35,12 @@ const MenuBar = () => {
         }
     }, [openMenu]);
 
+    const { user, loading } = useUser();
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
+
     return (
         <nav className={openMenu ? "menu" : "menu-close"}>
             <ul className="menu-options">
@@ -41,12 +49,14 @@ const MenuBar = () => {
                         <img className={openMenu ? "icon-logo-principal" : "icon-logo-secundario"} src={openMenu ? iconLogoPrincipal : iconLogoSecundaria} alt="Logo do Sistema de Gerenciamento de Bibliotecas BookFlow" />
                     </span>
                 </li>
-                <MenuLink page="/Usuarios">
-                    <span className={openMenu ? "" : "menu-options-pages-close"}>
-                        <img className="icon" src={iconUser} alt="Ir para a página Usuários" />
-                        <p>{showText ? "Usuários" : ""}</p>
-                    </span>
-                </MenuLink>
+                <PermissionGate permissions={[user.permissao]}>
+                    <MenuLink page="/Usuarios">
+                        <span className={openMenu ? "" : "menu-options-pages-close"}>
+                            <img className="icon" src={iconUser} alt="Ir para a página Usuários" />
+                            <p>{showText ? "Usuários" : ""}</p>
+                        </span>
+                    </MenuLink>
+                </PermissionGate>
                 <MenuLink page="/Alunos">
                     <span className={openMenu ? "" : "menu-options-pages-close"}>
                         <img className="icon" src={iconAlunos} alt="Ir para a página Alunos" />

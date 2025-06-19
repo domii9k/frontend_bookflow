@@ -16,12 +16,13 @@ const LoginComponent = () => {
         try {
             const response = await AuthService.login({ email, senha });
 
-            // Verifica se o token foi retornado
             if (response.data && response.data.token) {
-                const token = response.data.token;
-                localStorage.setItem('token', token); // Armazena o token no localStorage
-                AuthService.setAuthToken(token); // Configura o token para as requisições
-                navigate('/Emprestimos'); // Redireciona para a tela "Livros"
+                const { token, usuario } = response.data;
+                localStorage.setItem('token', token);
+                AuthService.setAuthToken(token);
+                AuthService.setUserData(usuario);
+                console.log("teste: ", usuario);
+                navigate('/Emprestimos');
             } else {
                 setMessage('Credenciais Incorretas!');
             }
